@@ -1,0 +1,433 @@
+/* ===== Reset & Base ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: #f4f4f4;
+  color: #161616;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* ===== Page layout ===== */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #161616;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #525252;
+  max-width: 780px;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+/* ===== Loading / Error ===== */
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: #525252;
+  font-size: 15px;
+}
+
+.error {
+  background: #fff1f1;
+  border-left: 3px solid #da1e28;
+  color: #da1e28;
+  padding: 12px 16px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ===== Repo accordion ===== */
+.repo-section {
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.repo-section:first-child {
+  border-top: 1px solid #e0e0e0;
+}
+
+.repo-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+  gap: 10px;
+  transition: background 0.12s;
+}
+
+.repo-header:hover {
+  background: #f9f9f9;
+}
+
+.repo-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #161616;
+}
+
+/* ===== Chevron icons ===== */
+.chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  color: #525252;
+}
+
+.chevron svg {
+  width: 12px;
+  height: 12px;
+}
+
+.repo-header.open > .chevron {
+  transform: rotate(90deg);
+}
+
+/* ===== Severity pills ===== */
+.pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+  line-height: 18px;
+}
+
+.pill-critical {
+  background: #da1e28;
+  color: #fff;
+}
+
+.pill-high {
+  background: #fa4d56;
+  color: #fff;
+}
+
+.pill-medium {
+  background: #f1c21b;
+  color: #161616;
+}
+
+.pill-low {
+  background: #42be65;
+  color: #fff;
+}
+
+.pill-unknown {
+  background: #c6c6c6;
+  color: #161616;
+}
+
+/* ===== Repo body (dependency table) ===== */
+.repo-body {
+  display: none;
+}
+
+.repo-body.open {
+  display: block;
+  max-height: 420px;
+  overflow-y: auto;
+  border-left: 3px solid #0f62fe;
+  padding-left: 12px;
+}
+
+/* ===== Dependency table ===== */
+.dep-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.dep-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #525252;
+  background: #f4f4f4;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  white-space: nowrap;
+}
+
+.dep-table thead th .sort-arrow {
+  font-size: 10px;
+  margin-left: 2px;
+}
+
+/* ===== Dependency rows ===== */
+.dep-row {
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.dep-row:hover {
+  background: #f9f9f9;
+}
+
+.dep-row td {
+  padding: 12px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid #e8e8e8;
+  vertical-align: middle;
+  color: #161616;
+}
+
+.dep-row td:first-child {
+  width: 32px;
+  padding-right: 0;
+}
+
+.dep-chevron {
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  color: #525252;
+  transition: transform 0.2s ease;
+}
+
+.dep-chevron svg {
+  width: 12px;
+  height: 12px;
+}
+
+.dep-row.open .dep-chevron {
+  transform: rotate(90deg);
+}
+
+/* ===== CVE detail panel ===== */
+.cve-panel {
+  display: none;
+}
+
+.cve-panel.open {
+  display: table-row;
+}
+
+.cve-panel > td {
+  padding: 0 !important;
+  border-bottom: 1px solid #e0e0e0;
+  background: #f9f9f9;
+}
+
+/* Scroll CVE panel if a dependency has many CVEs */
+.cve-scroll {
+  max-height: 300px;
+  overflow-y: auto;
+  border-left: 3px solid #e0e0e0;
+  padding-left: 12px;
+}
+
+.cve-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.cve-scroll::-webkit-scrollbar-thumb {
+  background: #c6c6c6;
+  border-radius: 3px;
+}
+
+/* Subtle scrollbar on repo body */
+.repo-body.open::-webkit-scrollbar {
+  width: 6px;
+}
+
+.repo-body.open::-webkit-scrollbar-track {
+  background: #f4f4f4;
+}
+
+.repo-body.open::-webkit-scrollbar-thumb {
+  background: #c6c6c6;
+  border-radius: 3px;
+}
+
+.repo-body.open::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.cve-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.cve-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-align: left;
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #525252;
+  background: #e8e8e8;
+  border-bottom: 1px solid #d0d0d0;
+  white-space: nowrap;
+}
+
+.cve-table tbody td {
+  padding: 10px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid #e8e8e8;
+  vertical-align: middle;
+  color: #161616;
+}
+
+.cve-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* CVE link */
+.cve-link {
+  color: #0f62fe;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cve-link:hover {
+  text-decoration: underline;
+}
+
+/* Score display */
+.score {
+  white-space: nowrap;
+}
+
+/* CVE table text-truncation columns */
+.desc-cell {
+  max-width: 280px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  color: #525252;
+}
+
+.affected-cell {
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fixed-cell {
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== Phase 2: source controls ===== */
+.source-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.source-controls label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #525252;
+}
+
+.source-controls select,
+.source-controls input[type="password"] {
+  padding: 6px 12px;
+  border: 1px solid #c6c6c6;
+  border-radius: 4px;
+  font-size: 13px;
+  background: #fff;
+  color: #161616;
+  outline: none;
+}
+
+.source-controls input[type="password"] {
+  width: 260px;
+}
+
+.source-controls select:focus,
+.source-controls input:focus {
+  border-color: #0f62fe;
+}
+
+.btn {
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #0f62fe;
+  color: #fff;
+  transition: background 0.12s;
+}
+
+.btn:hover {
+  background: #0353e9;
+}
+
+.btn:disabled {
+  background: #c6c6c6;
+  cursor: not-allowed;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  main {
+    padding: 24px 16px 40px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .dep-table thead th,
+  .dep-table td {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .cve-table thead th,
+  .cve-table tbody td {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .desc-cell {
+    max-width: 160px;
+  }
+}
