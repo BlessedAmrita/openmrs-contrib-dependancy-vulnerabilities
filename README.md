@@ -3,13 +3,8 @@
 A static dashboard that visualizes dependency security vulnerabilities across OpenMRS repositories.
 Built with plain HTML, CSS, and vanilla JavaScript. No frameworks, no build tools, no npm.
 
-**Live Demo:** [link]
-
-**Screen Recording:** [link]
-
-## Screenshot
-
-[here]
+## 🚀Live Demo 
+**View the dashboard here:** https://openmrs-contrib-dependancy-vulnerab.vercel.app/
 
 ## Getting Started
 
